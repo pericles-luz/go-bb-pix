@@ -6,7 +6,30 @@
 
 Cliente Go completo para as APIs de PIX e PIX Automático do Banco do Brasil.
 
-## Características
+## 📋 Índice
+
+- [Por que usar este pacote?](#-por-que-usar-este-pacote)
+- [Características](#-características)
+- [Instalação](#-instalação)
+- [Quick Start](#-quick-start)
+- [Configuração](#-configuração)
+- [Operações Suportadas](#-operações-suportadas)
+- [Segurança](#-segurança)
+- [Tratamento de Erros](#-tratamento-de-erros)
+- [Testes](#-testes)
+- [Contribuindo](#-contribuindo)
+- [Licença](#-licença)
+
+## 🎯 Por que usar este pacote?
+
+- **Produção-ready**: Implementa retry, circuit breaker e outras práticas de resiliência
+- **Sem dependências**: Zero dependências externas facilita auditoria de segurança e reduz supply chain attacks
+- **Bem testado**: Alta cobertura de testes e desenvolvimento TDD garantem qualidade
+- **Type-safe**: Tipos fortemente tipados previnem erros em tempo de compilação
+- **Bem documentado**: Documentação completa, exemplos e guia de contribuição
+- **Mantido ativamente**: Seguindo as melhores práticas da comunidade Go
+
+## ✨ Características
 
 - ✅ **Zero dependências externas** - Usa apenas a standard library do Go
 - ✅ **TDD** - Desenvolvido com Test-Driven Development
@@ -16,7 +39,7 @@ Cliente Go completo para as APIs de PIX e PIX Automático do Banco do Brasil.
 - ✅ **Context-aware** - Suporte completo a context para cancelamento e timeout
 - ✅ **Type-safe** - Tipos fortemente tipados para todas as operações
 
-## Instalação
+## 📦 Instalação
 
 ```bash
 go get github.com/pericles-luz/go-bb-pix
@@ -24,7 +47,7 @@ go get github.com/pericles-luz/go-bb-pix
 
 Requisitos: Go 1.21+
 
-## Quick Start
+## 🚀 Quick Start
 
 ```go
 package main
@@ -70,7 +93,7 @@ func main() {
 }
 ```
 
-## Configuração
+## ⚙️ Configuração
 
 ### Variáveis de Ambiente
 
@@ -107,11 +130,11 @@ client, err := bbpix.New(config,
 )
 ```
 
-## Operações Suportadas
+## 🎯 Operações Suportadas
 
-### PIX
+### 💰 PIX
 
-#### QR Code
+#### 📱 QR Code
 
 ```go
 pixClient := client.PIX()
@@ -138,7 +161,7 @@ list, err := pixClient.ListQRCodes(ctx, pix.ListQRCodesParams{
 })
 ```
 
-#### Pagamentos
+#### 💳 Pagamentos
 
 ```go
 // Consultar pagamento
@@ -151,7 +174,7 @@ payments, err := pixClient.ListPayments(ctx, pix.ListPaymentsParams{
 })
 ```
 
-#### Devoluções
+#### 💸 Devoluções
 
 ```go
 // Criar devolução
@@ -163,9 +186,9 @@ refund, err := pixClient.CreateRefund(ctx, "e2e-id", pix.CreateRefundRequest{
 refund, err := pixClient.GetRefund(ctx, "e2e-id", "refund-id")
 ```
 
-### PIX Automático
+### 🔄 PIX Automático
 
-#### Cobranças Recorrentes
+#### 🔁 Cobranças Recorrentes
 
 ```go
 pixAutoClient := client.PIXAuto()
@@ -188,7 +211,7 @@ recurring, err := pixAutoClient.UpdateRecurring(ctx, "recurring-id", pixauto.Upd
 err := pixAutoClient.CancelRecurring(ctx, "recurring-id")
 ```
 
-#### Cobranças Agendadas
+#### 📅 Cobranças Agendadas
 
 ```go
 // Criar cobrança agendada (até 90 dias)
@@ -204,7 +227,7 @@ scheduled, err := pixAutoClient.GetScheduled(ctx, "scheduled-id")
 err := pixAutoClient.CancelScheduled(ctx, "scheduled-id")
 ```
 
-#### Acordos de Débito
+#### 📝 Acordos de Débito
 
 ```go
 // Criar acordo
@@ -225,7 +248,7 @@ agreement, err := pixAutoClient.UpdateAgreement(ctx, "agreement-id", pixauto.Upd
 err := pixAutoClient.CancelAgreement(ctx, "agreement-id")
 ```
 
-### Webhooks
+### 🔔 Webhooks
 
 ```go
 import "github.com/pericles-luz/go-bb-pix/webhook"
@@ -246,7 +269,7 @@ http.Handle("/webhook", handler)
 http.ListenAndServe(":8080", nil)
 ```
 
-## Ambientes
+## 🌍 Ambientes
 
 O pacote suporta três ambientes:
 
@@ -256,7 +279,38 @@ bbpix.EnvironmentHomologacao  // Ambiente de homologação
 bbpix.EnvironmentProducao     // Ambiente de produção
 ```
 
-## Tratamento de Erros
+## 🔒 Segurança
+
+### Credenciais
+
+**NUNCA** commite suas credenciais no código. Use variáveis de ambiente ou gestores de secrets:
+
+```go
+// ✅ BOM - Variáveis de ambiente
+config, err := bbpix.LoadConfigFromEnv()
+
+// ❌ RUIM - Hardcoded
+config := bbpix.Config{
+    ClientID:     "meu-client-id",     // NÃO FAÇA ISSO
+    ClientSecret: "meu-client-secret", // NÃO FAÇA ISSO
+}
+```
+
+### HTTPS
+
+Todas as comunicações com a API do Banco do Brasil são feitas via HTTPS. O cliente valida certificados SSL automaticamente.
+
+### Tokens OAuth2
+
+- Tokens são armazenados apenas em memória
+- Cache automático de tokens com renovação antes da expiração
+- Não há persistência de tokens em disco
+
+### Auditoria
+
+Como o pacote não tem dependências externas, é fácil auditar todo o código fonte para verificação de segurança.
+
+## ⚠️ Tratamento de Erros
 
 ```go
 qrCode, err := pixClient.CreateQRCode(ctx, request)
@@ -277,7 +331,7 @@ if err != nil {
 }
 ```
 
-## Testes
+## 🧪 Testes
 
 ### Testes Unitários
 
@@ -298,7 +352,7 @@ export BB_DEV_APP_KEY=sua-app-key
 go test -v -tags=integration ./...
 ```
 
-## Exemplos
+## 📖 Exemplos
 
 Veja a pasta `examples/` para exemplos completos:
 
@@ -306,7 +360,7 @@ Veja a pasta `examples/` para exemplos completos:
 - [PIX Automático Recorrente](examples/pixauto_recurring/main.go)
 - [Webhook Server](examples/webhook_server/main.go)
 
-## Resiliência
+## 🛡️ Resiliência
 
 O cliente implementa várias estratégias de resiliência:
 
@@ -330,7 +384,7 @@ O cliente implementa várias estratégias de resiliência:
 - Context-aware para timeout por operação
 - Configurável via `WithTimeout()`
 
-## Logging
+## 📝 Logging
 
 O pacote usa `log/slog` para logging estruturado:
 
@@ -344,27 +398,70 @@ logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
 client, err := bbpix.New(config, bbpix.WithLogger(logger))
 ```
 
-## Contribuindo
+## 🤝 Contribuindo
 
-Contribuições são bem-vindas! Por favor:
+Contribuições são muito bem-vindas! Este projeto segue as melhores práticas de desenvolvimento em Go.
+
+**Antes de contribuir, leia o [Guia de Contribuição](CONTRIBUTING.md)** que contém:
+
+- Como reportar bugs e sugerir features
+- Processo completo de Pull Request com exemplos
+- Padrões de código e boas práticas
+- Como executar testes
+- Estrutura do projeto
+
+### Processo Rápido
 
 1. Fork o projeto
-2. Crie uma branch para sua feature
+2. Crie uma branch para sua feature (`git checkout -b feat/nova-feature`)
 3. Escreva testes primeiro (TDD)
 4. Implemente a feature
-5. Execute os testes e pre-commit checks
-6. Abra um Pull Request
+5. Execute os testes (`go test ./... -short`)
+6. Execute pre-commit checks (`./scripts/pre-commit.sh`)
+7. Commit suas mudanças (`git commit -m 'feat: adiciona nova feature'`)
+8. Push para a branch (`git push origin feat/nova-feature`)
+9. Abra um Pull Request
 
-## Licença
+Veja todos os detalhes em [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## 📊 Status do Projeto
+
+### Implementado
+
+- ✅ Cliente HTTP com retry e circuit breaker
+- ✅ Autenticação OAuth2
+- ✅ PIX: QR Code, pagamentos, devoluções
+- ✅ PIX Automático: cobranças recorrentes, agendadas e acordos de débito
+- ✅ Webhooks com validação de assinatura
+- ✅ Ambientes: sandbox, homologação e produção
+
+### Roadmap
+
+- 🔄 Suporte a PIX copia e cola (EMV)
+- 🔄 Retry configurável por tipo de operação
+- 🔄 Métricas e tracing (OpenTelemetry)
+- 🔄 Exemplos adicionais
+- 🔄 CLI para operações comuns
+
+Sugestões? [Abra uma issue](https://github.com/pericles-luz/go-bb-pix/issues)!
+
+## 📄 Licença
 
 MIT License - veja [LICENSE](LICENSE) para detalhes.
 
-## Recursos
+## 📚 Recursos
 
 - [Documentação oficial da API PIX BB](https://www.bb.com.br/site/developers/bb-como-servico/api-pix/)
 - [Especificação PIX do Banco Central](https://github.com/bacen/pix-api)
-- [Documentação completa (CLAUDE.md)](CLAUDE.md)
+- [Guia de Contribuição](CONTRIBUTING.md)
+- [Documentação completa do projeto](CLAUDE.md)
 
-## Suporte
+## 💬 Suporte
 
-Para bugs e feature requests, [abra uma issue](https://github.com/pericles-luz/go-bb-pix/issues).
+- **Bugs e feature requests**: [Abra uma issue](https://github.com/pericles-luz/go-bb-pix/issues)
+- **Dúvidas sobre contribuição**: Veja [CONTRIBUTING.md](CONTRIBUTING.md)
+- **Segurança**: Para vulnerabilidades de segurança, abra uma issue privada ou entre em contato diretamente
+
+---
+
+**Feito com ❤️ pela comunidade Go brasileira**
