@@ -1,0 +1,9 @@
+{
+  "calendario": {
+    "expiracao": 7200
+  },
+  "valor": {
+    "original": "50.00"
+  },
+  "solicitacaoPagador": "Serviço atualizado."
+}

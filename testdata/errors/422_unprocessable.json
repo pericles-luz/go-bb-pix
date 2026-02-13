@@ -1,0 +1,12 @@
+{
+  "type": "https://api.bb.com.br/api/v2/error/RegraDeNegocio",
+  "title": "Entidade não processável",
+  "status": 422,
+  "detail": "Violação de regra de negócio",
+  "violacoes": [
+    {
+      "razao": "O txid já existe para este CPF/CNPJ",
+      "propriedade": "txid"
+    }
+  ]
+}

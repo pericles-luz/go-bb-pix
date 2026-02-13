@@ -1,0 +1,41 @@
+{
+  "parametros": {
+    "inicio": "2024-01-01T00:00:00Z",
+    "fim": "2024-01-05T23:59:59Z",
+    "paginacao": {
+      "paginaAtual": 0,
+      "itensPorPagina": 100,
+      "quantidadeDePaginas": 1,
+      "quantidadeTotalDeItens": 2
+    }
+  },
+  "pix": [
+    {
+      "endToEndId": "E12345678202406201221abcdef12345",
+      "txid": "fb2761260e554ad593c7226beb5cb650",
+      "valor": "37.00",
+      "horario": "2024-01-15T12:34:21Z",
+      "infoPagador": "Pagamento de serviço",
+      "devolucoes": []
+    },
+    {
+      "endToEndId": "E98765432202406201330fedcba98765",
+      "txid": "3136957d93134f2184b369e8f1c0729d",
+      "valor": "123.45",
+      "horario": "2024-01-16T13:30:45Z",
+      "infoPagador": "Mensalidade",
+      "devolucoes": [
+        {
+          "id": "dev1",
+          "rtrId": "D12345678202009091000abcde123456",
+          "valor": "10.00",
+          "horario": {
+            "solicitacao": "2024-01-16T14:00:00Z",
+            "liquidacao": "2024-01-16T14:00:30Z"
+          },
+          "status": "DEVOLVIDO"
+        }
+      ]
+    }
+  ]
+}

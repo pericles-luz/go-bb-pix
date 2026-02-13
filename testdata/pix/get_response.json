@@ -1,0 +1,12 @@
+{
+  "endToEndId": "E12345678202406201221abcdef12345",
+  "txid": "fb2761260e554ad593c7226beb5cb650",
+  "valor": "37.00",
+  "horario": "2024-01-15T12:34:21Z",
+  "infoPagador": "Pagamento de serviço",
+  "pagador": {
+    "cpf": "12345678909",
+    "nome": "João da Silva"
+  },
+  "devolucoes": []
+}

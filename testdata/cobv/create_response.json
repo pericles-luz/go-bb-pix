@@ -1,0 +1,43 @@
+{
+  "calendario": {
+    "criacao": "2024-01-15T10:00:00Z",
+    "dataDeVencimento": "2035-06-24",
+    "validadeAposVencimento": 30
+  },
+  "txid": "fb2761260e554ad593c7226beb5cb650",
+  "revisao": 0,
+  "loc": {
+    "id": 789,
+    "location": "pix.example.com/qr/v2/cobv/9d36b84fc70b478fb95c12729b90ca25",
+    "tipoCob": "cobv"
+  },
+  "location": "pix.example.com/qr/v2/cobv/9d36b84fc70b478fb95c12729b90ca25",
+  "status": "ATIVA",
+  "devedor": {
+    "cpf": "12345678909",
+    "nome": "Francisco da Silva"
+  },
+  "valor": {
+    "original": "123.45",
+    "multa": {
+      "modalidade": "2",
+      "valorPerc": "15.00"
+    },
+    "juros": {
+      "modalidade": "2",
+      "valorPerc": "2.00"
+    },
+    "desconto": {
+      "modalidade": "1",
+      "descontoDataFixa": [
+        {
+          "data": "2035-06-20",
+          "valorPerc": "5.00"
+        }
+      ]
+    }
+  },
+  "chave": "95127446000198",
+  "solicitacaoPagador": "Cobrança dos serviços prestados.",
+  "pixCopiaECola": "00020126580014br.gov.bcb.pix..."
+}

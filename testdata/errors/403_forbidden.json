@@ -1,0 +1,6 @@
+{
+  "type": "https://api.bb.com.br/api/v2/error/AcessoNegado",
+  "title": "Acesso Negado",
+  "status": 403,
+  "detail": "Violação de autorização pelo participante autenticado"
+}

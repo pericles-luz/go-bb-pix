@@ -1,0 +1,9 @@
+{
+  "id": "dev1",
+  "rtrId": "D12345678202009091000abcde123456",
+  "valor": "7.89",
+  "horario": {
+    "solicitacao": "2024-01-15T14:00:00Z"
+  },
+  "status": "EM_PROCESSAMENTO"
+}

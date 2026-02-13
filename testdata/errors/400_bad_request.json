@@ -1,0 +1,12 @@
+{
+  "type": "https://api.bb.com.br/api/v2/error/CobOperacaoInvalida",
+  "title": "Operação inválida",
+  "status": 400,
+  "detail": "Validação de schema ou semântica falhou",
+  "violacoes": [
+    {
+      "razao": "O campo 'valor.original' deve seguir o padrão '^\\d{1,10}\\.\\d{2}$'",
+      "propriedade": "valor.original"
+    }
+  ]
+}

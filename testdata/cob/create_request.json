@@ -1,0 +1,20 @@
+{
+  "calendario": {
+    "expiracao": 3600
+  },
+  "devedor": {
+    "cpf": "12345678909",
+    "nome": "Francisco da Silva"
+  },
+  "valor": {
+    "original": "37.00"
+  },
+  "chave": "9e881f18-cc66-4fc7-8f2c-a795dbb2bfc1",
+  "solicitacaoPagador": "Serviço realizado.",
+  "infoAdicionais": [
+    {
+      "nome": "Campo 1",
+      "valor": "Informação Adicional 1"
+    }
+  ]
+}

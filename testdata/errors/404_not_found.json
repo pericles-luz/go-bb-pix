@@ -1,0 +1,8 @@
+{
+  "type": "https://api.bb.com.br/api/v2/error/NaoEncontrado",
+  "title": "Não Encontrado",
+  "status": 404,
+  "detail": "Recurso não encontrado",
+  "correlationId": "API-BB-550e8400-e29b-41d4-a716-446655440000",
+  "numeroOcorrencia": 0
+}

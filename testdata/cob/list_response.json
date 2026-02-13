@@ -1,0 +1,40 @@
+{
+  "parametros": {
+    "inicio": "2024-01-01T00:00:00Z",
+    "fim": "2024-01-31T23:59:59Z",
+    "paginacao": {
+      "paginaAtual": 0,
+      "itensPorPagina": 100,
+      "quantidadeDePaginas": 1,
+      "quantidadeTotalDeItens": 2
+    }
+  },
+  "cobs": [
+    {
+      "calendario": {
+        "criacao": "2024-01-15T10:00:00Z",
+        "expiracao": 3600
+      },
+      "txid": "fb2761260e554ad593c7226beb5cb650",
+      "revisao": 0,
+      "status": "ATIVA",
+      "valor": {
+        "original": "37.00"
+      },
+      "chave": "9e881f18-cc66-4fc7-8f2c-a795dbb2bfc1"
+    },
+    {
+      "calendario": {
+        "criacao": "2024-01-16T10:00:00Z",
+        "expiracao": 3600
+      },
+      "txid": "3136957d93134f2184b369e8f1c0729d",
+      "revisao": 1,
+      "status": "CONCLUIDA",
+      "valor": {
+        "original": "100.00"
+      },
+      "chave": "9e881f18-cc66-4fc7-8f2c-a795dbb2bfc1"
+    }
+  ]
+}
