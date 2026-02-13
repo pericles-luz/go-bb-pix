@@ -4,12 +4,17 @@ package pix
 
 import (
 	"context"
-	"os"
 	"testing"
 	"time"
 
 	"github.com/pericles-luz/go-bb-pix/bbpix"
+	"github.com/pericles-luz/go-bb-pix/internal/testutil"
 )
+
+func init() {
+	// Load .env file for integration tests
+	_ = testutil.LoadEnv()
+}
 
 // TestE2E_CompleteQRCodeFlow tests the complete QR Code lifecycle
 func TestE2E_CompleteQRCodeFlow(t *testing.T) {
@@ -18,16 +23,18 @@ func TestE2E_CompleteQRCodeFlow(t *testing.T) {
 		t.Skip("Skipping integration test")
 	}
 
-	// Load credentials from environment
-	config := bbpix.Config{
-		Environment:     getEnv("BB_ENVIRONMENT", "sandbox"),
-		ClientID:        os.Getenv("BB_CLIENT_ID"),
-		ClientSecret:    os.Getenv("BB_CLIENT_SECRET"),
-		DeveloperAppKey: os.Getenv("BB_DEV_APP_KEY"),
+	// Check if credentials are available
+	if !testutil.HasCredentials() {
+		t.Skip("Integration test credentials not configured. Create .env file from .env.example")
 	}
 
-	if config.ClientID == "" || config.ClientSecret == "" || config.DeveloperAppKey == "" {
-		t.Skip("Integration test credentials not configured")
+	// Load credentials from environment
+	envConfig := testutil.GetBBConfig()
+	config := bbpix.Config{
+		Environment:     envConfig["environment"],
+		ClientID:        envConfig["client_id"],
+		ClientSecret:    envConfig["client_secret"],
+		DeveloperAppKey: envConfig["dev_app_key"],
 	}
 
 	// Create client
@@ -165,15 +172,16 @@ func TestE2E_PaymentAndRefundFlow(t *testing.T) {
 		t.Skip("Skipping integration test")
 	}
 
-	config := bbpix.Config{
-		Environment:     getEnv("BB_ENVIRONMENT", "sandbox"),
-		ClientID:        os.Getenv("BB_CLIENT_ID"),
-		ClientSecret:    os.Getenv("BB_CLIENT_SECRET"),
-		DeveloperAppKey: os.Getenv("BB_DEV_APP_KEY"),
+	if !testutil.HasCredentials() {
+		t.Skip("Integration test credentials not configured. Create .env file from .env.example")
 	}
 
-	if config.ClientID == "" {
-		t.Skip("Integration test credentials not configured")
+	envConfig := testutil.GetBBConfig()
+	config := bbpix.Config{
+		Environment:     envConfig["environment"],
+		ClientID:        envConfig["client_id"],
+		ClientSecret:    envConfig["client_secret"],
+		DeveloperAppKey: envConfig["dev_app_key"],
 	}
 
 	client, err := bbpix.New(config)
@@ -261,15 +269,16 @@ func TestE2E_PaginationHandling(t *testing.T) {
 		t.Skip("Skipping integration test")
 	}
 
-	config := bbpix.Config{
-		Environment:     getEnv("BB_ENVIRONMENT", "sandbox"),
-		ClientID:        os.Getenv("BB_CLIENT_ID"),
-		ClientSecret:    os.Getenv("BB_CLIENT_SECRET"),
-		DeveloperAppKey: os.Getenv("BB_DEV_APP_KEY"),
+	if !testutil.HasCredentials() {
+		t.Skip("Integration test credentials not configured. Create .env file from .env.example")
 	}
 
-	if config.ClientID == "" {
-		t.Skip("Integration test credentials not configured")
+	envConfig := testutil.GetBBConfig()
+	config := bbpix.Config{
+		Environment:     envConfig["environment"],
+		ClientID:        envConfig["client_id"],
+		ClientSecret:    envConfig["client_secret"],
+		DeveloperAppKey: envConfig["dev_app_key"],
 	}
 
 	client, err := bbpix.New(config)
@@ -329,11 +338,4 @@ func generateUniqueTxID() string {
 func generateUniqueRefundID() string {
 	timestamp := time.Now().UnixNano()
 	return "dev" + string(rune(timestamp%100000000))
-}
-
-func getEnv(key, defaultValue string) string {
-	if value := os.Getenv(key); value != "" {
-		return value
-	}
-	return defaultValue
 }

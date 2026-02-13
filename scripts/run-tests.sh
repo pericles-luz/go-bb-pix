@@ -82,12 +82,16 @@ echo "  Test cases in pix package: $TEST_CASES"
 
 # 10. Check for E2E tests availability
 echo ""
-if [ -n "$BB_CLIENT_ID" ] && [ -n "$BB_CLIENT_SECRET" ] && [ -n "$BB_DEV_APP_KEY" ]; then
+if [ -f ".env" ]; then
+    echo -e "${GREEN}E2E tests available${NC} (.env file found)"
+    echo "  Run with: go test -v -tags=integration ./pix"
+elif [ -n "$BB_CLIENT_ID" ] && [ -n "$BB_CLIENT_SECRET" ] && [ -n "$BB_DEV_APP_KEY" ]; then
     echo -e "${GREEN}E2E tests available${NC} (credentials configured)"
     echo "  Run with: go test -v -tags=integration ./pix"
 else
     echo -e "${YELLOW}E2E tests not available${NC} (credentials not configured)"
-    echo "  Configure: BB_CLIENT_ID, BB_CLIENT_SECRET, BB_DEV_APP_KEY"
+    echo "  Setup: cp .env.example .env"
+    echo "  Then edit .env with your credentials"
 fi
 
 echo ""
@@ -98,5 +102,6 @@ echo ""
 echo "For more details, see:"
 echo "  - TESTING.md for testing guide"
 echo "  - TEST_SUMMARY.md for test summary"
+echo "  - ENV_CONFIG.md for environment configuration"
 echo "  - testdata/README.md for fixture documentation"
 echo ""

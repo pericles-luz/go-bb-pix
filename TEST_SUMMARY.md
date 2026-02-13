@@ -202,14 +202,15 @@ go test ./pix -v -run TestIntegration
 ### Testes E2E (API Real)
 
 ```bash
-# Requer credenciais
-export BB_ENVIRONMENT=sandbox
-export BB_CLIENT_ID=seu-client-id
-export BB_CLIENT_SECRET=seu-client-secret
-export BB_DEV_APP_KEY=sua-app-key
+# 1. Configure credenciais no .env
+cp .env.example .env
+# Edite .env com suas credenciais
 
+# 2. Execute testes E2E
 go test -v -tags=integration ./pix
 ```
+
+Veja [ENV_CONFIG.md](ENV_CONFIG.md) para mais detalhes.
 
 ## Documentação Adicional
 

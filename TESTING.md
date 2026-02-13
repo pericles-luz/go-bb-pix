@@ -86,12 +86,21 @@ Testes contra a API real do Banco do Brasil (sandbox/homologação).
 **Build Tag**: `integration`
 
 **Pré-requisitos**:
-```bash
-export BB_ENVIRONMENT=sandbox
-export BB_CLIENT_ID=seu-client-id
-export BB_CLIENT_SECRET=seu-client-secret
-export BB_DEV_APP_KEY=sua-developer-application-key
-```
+
+1. Criar arquivo `.env` a partir do exemplo:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Preencher credenciais no `.env`:
+   ```env
+   BB_ENVIRONMENT=sandbox
+   BB_CLIENT_ID=seu-client-id
+   BB_CLIENT_SECRET=seu-client-secret
+   BB_DEV_APP_KEY=sua-developer-application-key
+   ```
+
+Veja [ENV_CONFIG.md](ENV_CONFIG.md) para mais detalhes sobre configuração.
 
 **Executar**:
 ```bash
@@ -303,16 +312,21 @@ t.Logf("Creating QR Code with txid: %s", txid)
 
 ### Testes E2E falhando
 
-1. Verificar credenciais:
+1. Verificar se `.env` existe:
    ```bash
-   echo $BB_CLIENT_ID
-   echo $BB_CLIENT_SECRET
-   echo $BB_DEV_APP_KEY
+   ls -la .env
+   cat .env
    ```
 
-2. Verificar ambiente:
+2. Verificar credenciais no `.env`:
    ```bash
-   echo $BB_ENVIRONMENT  # Deve ser 'sandbox', 'homolog' ou 'production'
+   grep BB_ .env
+   ```
+
+3. Recriar `.env` se necessário:
+   ```bash
+   cp .env.example .env
+   # Editar e preencher credenciais
    ```
 
 3. Testar autenticação:

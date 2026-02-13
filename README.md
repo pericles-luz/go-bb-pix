@@ -47,6 +47,23 @@ go get github.com/pericles-luz/go-bb-pix
 
 Requisitos: Go 1.21+
 
+### Configuração Inicial
+
+1. Copie o arquivo de exemplo:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Preencha suas credenciais no `.env`:
+   ```env
+   BB_ENVIRONMENT=sandbox
+   BB_CLIENT_ID=seu-client-id
+   BB_CLIENT_SECRET=seu-client-secret
+   BB_DEV_APP_KEY=gw-dev-app-key
+   ```
+
+Veja [ENV_CONFIG.md](ENV_CONFIG.md) para detalhes completos sobre configuração.
+
 ## 🚀 Quick Start
 
 ```go
@@ -95,21 +112,37 @@ func main() {
 
 ## ⚙️ Configuração
 
-### Variáveis de Ambiente
+### Usando arquivo .env (Recomendado)
 
-Você pode configurar o cliente usando variáveis de ambiente:
+A forma recomendada é usar um arquivo `.env`:
 
-```bash
-export BB_ENVIRONMENT=sandbox      # sandbox, homologacao, producao
-export BB_CLIENT_ID=seu-client-id
-export BB_CLIENT_SECRET=seu-client-secret
-export BB_DEV_APP_KEY=sua-app-key
-```
+1. Copie o arquivo de exemplo:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edite `.env` com suas credenciais:
+   ```env
+   BB_ENVIRONMENT=sandbox
+   BB_CLIENT_ID=seu-client-id
+   BB_CLIENT_SECRET=seu-client-secret
+   BB_DEV_APP_KEY=gw-dev-app-key
+   ```
+
+3. O arquivo será carregado automaticamente nos testes
+
+📚 **Documentação completa**: [ENV_CONFIG.md](ENV_CONFIG.md)
+
+### Configuração Programática
+
+Você também pode configurar diretamente no código:
 
 ```go
-config, err := bbpix.LoadConfigFromEnv()
-if err != nil {
-    log.Fatal(err)
+config := bbpix.Config{
+    Environment:     bbpix.EnvironmentSandbox,
+    ClientID:        "seu-client-id",
+    ClientSecret:    "seu-client-secret",
+    DeveloperAppKey: "gw-dev-app-key",
 }
 
 client, err := bbpix.New(config)
